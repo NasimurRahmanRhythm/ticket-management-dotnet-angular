@@ -1,0 +1,30 @@
+.badge {
+  display: inline-block;
+  padding: 0.125rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--color-neutral-soft);
+  color: var(--color-text-muted);
+}
+
+.badge--Open {
+  background: var(--color-info-soft);
+  color: var(--color-info);
+}
+
+.badge--InProgress {
+  background: var(--color-warning-soft);
+  color: var(--color-warning);
+}
+
+.badge--Closed {
+  background: var(--color-success-soft);
+  color: var(--color-success);
+}
+
+.badge--priority-High {
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+}

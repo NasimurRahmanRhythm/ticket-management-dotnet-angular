@@ -1,0 +1,23 @@
+<div class="filter-bar" role="group" aria-label="Filter tickets by status">
+  <button
+    type="button"
+    class="filter-bar__option"
+    [class.filter-bar__option--active]="selectedStatus() === null"
+    [attr.aria-pressed]="selectedStatus() === null"
+    (click)="select(null)"
+  >
+    All
+  </button>
+
+  @for (option of statusOptions; track option.value) {
+    <button
+      type="button"
+      class="filter-bar__option"
+      [class.filter-bar__option--active]="selectedStatus() === option.value"
+      [attr.aria-pressed]="selectedStatus() === option.value"
+      (click)="select(option.value)"
+    >
+      {{ option.label }}
+    </button>
+  }
+</div>

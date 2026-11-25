@@ -1,0 +1,42 @@
+<form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+  <div class="form-field">
+    <label for="title">Title</label>
+    <input id="title" class="input" type="text" formControlName="title" />
+    <app-form-field-error [control]="form.controls.title" />
+  </div>
+
+  <div class="form-field">
+    <label for="description">Description</label>
+    <textarea id="description" class="input" formControlName="description"></textarea>
+    <app-form-field-error [control]="form.controls.description" />
+  </div>
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="priority">Priority</label>
+      <select id="priority" class="input" formControlName="priority">
+        @for (option of priorityOptions; track option.value) {
+          <option [value]="option.value">{{ option.label }}</option>
+        }
+      </select>
+    </div>
+
+    @if (isEditMode()) {
+      <div class="form-field">
+        <label for="status">Status</label>
+        <select id="status" class="input" formControlName="status">
+          @for (option of statusOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+    }
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn btn--ghost" (click)="cancelled.emit()">Cancel</button>
+    <button type="submit" class="btn btn--primary" [disabled]="submitting()">
+      {{ submitting() ? 'Saving…' : isEditMode() ? 'Save changes' : 'Create ticket' }}
+    </button>
+  </div>
+</form>

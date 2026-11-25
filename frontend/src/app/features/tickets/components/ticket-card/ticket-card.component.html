@@ -1,0 +1,15 @@
+<a class="ticket-card" [routerLink]="[ticket().id]">
+  <div class="ticket-card__header">
+    <h2 class="ticket-card__title">{{ ticket().title }}</h2>
+    <app-status-badge [status]="ticket().status" />
+  </div>
+
+  @if (ticket().description; as description) {
+    <p class="ticket-card__description">{{ description }}</p>
+  }
+
+  <div class="ticket-card__meta">
+    <app-priority-badge [priority]="ticket().priority" />
+    <span class="muted">Updated {{ ticket().updatedAt | date: 'medium' }}</span>
+  </div>
+</a>

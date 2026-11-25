@@ -1,0 +1,22 @@
+<section class="card">
+  <div class="page-header">
+    <h1>{{ isEditMode() ? 'Edit ticket' : 'New ticket' }}</h1>
+  </div>
+
+  @if (saveError(); as message) {
+    <app-alert [message]="message" />
+  }
+
+  @if (ticket.isLoading()) {
+    <app-loading-indicator label="Loading ticket…" />
+  } @else if (loadError(); as message) {
+    <app-alert [message]="message" />
+  } @else {
+    <app-ticket-form
+      [ticket]="ticket.value() ?? null"
+      [submitting]="saving()"
+      (formSubmit)="save($event)"
+      (cancelled)="cancel()"
+    />
+  }
+</section>

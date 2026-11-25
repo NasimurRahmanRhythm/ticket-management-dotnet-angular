@@ -1,0 +1,43 @@
+<a class="back-link" [routerLink]="ticketsPath">← Back to tickets</a>
+
+@if (ticket.isLoading()) {
+  <app-loading-indicator label="Loading ticket…" />
+} @else if (loadError(); as message) {
+  <app-alert [message]="message" />
+} @else if (ticket.value(); as current) {
+  <article class="card details">
+    <header class="details__header">
+      <h1 class="details__title">{{ current.title }}</h1>
+      <div class="details__badges">
+        <app-status-badge [status]="current.status" />
+        <app-priority-badge [priority]="current.priority" />
+      </div>
+    </header>
+
+    <p class="details__description" [class.muted]="!current.description">
+      {{ current.description || 'No description provided.' }}
+    </p>
+
+    <dl class="details__meta">
+      <div>
+        <dt>Created</dt>
+        <dd>{{ current.createdAt | date: 'medium' }}</dd>
+      </div>
+      <div>
+        <dt>Last updated</dt>
+        <dd>{{ current.updatedAt | date: 'medium' }}</dd>
+      </div>
+    </dl>
+
+    @if (deleteError(); as message) {
+      <app-alert [message]="message" />
+    }
+
+    <footer class="form-actions">
+      <button type="button" class="btn btn--danger" [disabled]="deleting()" (click)="delete()">
+        {{ deleting() ? 'Deleting…' : 'Delete' }}
+      </button>
+      <a class="btn btn--primary" [routerLink]="editPath">Edit</a>
+    </footer>
+  </article>
+}

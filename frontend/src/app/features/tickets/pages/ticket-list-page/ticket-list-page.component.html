@@ -1,0 +1,28 @@
+<div class="page-header">
+  <h1>My tickets</h1>
+  <a class="btn btn--primary" [routerLink]="newTicketPath">New ticket</a>
+</div>
+
+<app-ticket-filter-bar [selectedStatus]="selectedStatus()" (statusChange)="onStatusChange($event)" />
+
+@if (tickets.isLoading()) {
+  <app-loading-indicator label="Loading tickets…" />
+} @else if (errorMessage(); as message) {
+  <app-alert [message]="message" />
+} @else {
+  @let ticketList = tickets.value() ?? [];
+  @if (ticketList.length === 0) {
+    <div class="card empty-state">
+      <p class="muted">No tickets found.</p>
+      <a [routerLink]="newTicketPath">Create your first ticket</a>
+    </div>
+  } @else {
+    <ul class="ticket-grid">
+      @for (ticket of ticketList; track ticket.id) {
+        <li>
+          <app-ticket-card [ticket]="ticket" />
+        </li>
+      }
+    </ul>
+  }
+}

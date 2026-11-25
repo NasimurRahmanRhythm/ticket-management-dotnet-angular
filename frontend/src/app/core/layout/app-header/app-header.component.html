@@ -1,0 +1,12 @@
+<header class="app-header">
+  <div class="container app-header__inner">
+    <a class="app-header__brand" [routerLink]="ticketsPath">Ticket Manager</a>
+
+    @if (currentUser(); as user) {
+      <div class="app-header__user">
+        <span class="app-header__name">{{ user.name }}</span>
+        <button type="button" class="btn btn--ghost" (click)="logout()">Log out</button>
+      </div>
+    }
+  </div>
+</header>
